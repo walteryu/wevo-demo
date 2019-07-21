@@ -1,10 +1,12 @@
 .env
+.flaskenv
 .DS_Store
+
+app.db
 settings.py
 git_stage.sh
 check_repo.sh
 
-app.db
 /logs
 /venv/
 __pycache__/
