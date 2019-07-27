@@ -80,3 +80,11 @@ Data Dashboard with Plotly:
 * Hepta Analytics [Tutorial](https://blog.heptanalytics.com/2018/08/07/flask-plotly-dashboard/)
 * Hepta Analytics [Github Repo](https://github.com/yvonnegitau/flask-Dashboard)
 * Plotly [website](https://plot.ly/products/dash/) with additional documentation
+
+### Installation
+
+1. Install and run virtualenv, requirements and export vars
+* 1.1. Run script `scripts/setup_venv`
+* 1.2. Script creates workspace and runs requirements
+2. Set secret key and run local server with `flask run`
+3. Debugging options are turned on, so troubleshoot for errors
