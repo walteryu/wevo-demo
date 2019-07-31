@@ -97,6 +97,48 @@ class UserModelCase(unittest.TestCase):
         self.assertEqual(f3, [p3, p4])
         self.assertEqual(f4, [p4])
 
+    def test_follow_projects(self):
+        # create four users
+        u1 = User(username='john', email='john@example.com')
+        u2 = User(username='susan', email='susan@example.com')
+        u3 = User(username='mary', email='mary@example.com')
+        u4 = User(username='david', email='david@example.com')
+        db.session.add_all([u1, u2, u3, u4])
+
+        # create four posts
+        now = datetime.utcnow()
+        p1 = Project(name="aggie square", author=u1,
+                  description="innovation center",
+                  timestamp=now + timedelta(seconds=1))
+        p2 = Project(name="safeway gas station", author=u2,
+                  description="grocery gas station",
+                  timestamp=now + timedelta(seconds=4))
+        p3 = Project(name="p st office building", author=u3,
+                  description="building project site",
+                  timestamp=now + timedelta(seconds=3))
+        p4 = Project(name="cdfa office building", author=u4,
+                  description="building project site",
+                  timestamp=now + timedelta(seconds=2))
+        db.session.add_all([p1, p2, p3, p4])
+        db.session.commit()
+
+        # setup the followers
+        u1.follow(u2)  # john follows susan
+        u1.follow(u4)  # john follows david
+        u2.follow(u3)  # susan follows mary
+        u3.follow(u4)  # mary follows david
+        db.session.commit()
+
+        # check the followed posts of each user
+        f1 = u1.followed_projects().all()
+        f2 = u2.followed_projects().all()
+        f3 = u3.followed_projects().all()
+        f4 = u4.followed_projects().all()
+        self.assertEqual(f1, [p2, p4, p1])
+        self.assertEqual(f2, [p2, p3])
+        self.assertEqual(f3, [p3, p4])
+        self.assertEqual(f4, [p4])
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
