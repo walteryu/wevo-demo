@@ -142,11 +142,8 @@ class UserModelCase(unittest.TestCase):
 
     # test routes
     def test_main_page(self):
-        # response = self.app.get('/', follow_redirects=True)
-        # self.assertEqual(response.status_code, 200)
-
         with self.app.test_client() as c:
-            response = c.get('/some/path/that/exists')
+            response = c.get('/')
             self.assertEquals(response.status_code, 200)
 
 if __name__ == '__main__':
