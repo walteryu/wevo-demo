@@ -147,6 +147,14 @@ class User(UserMixin, PaginatedAPIMixin, db.Model):
         own = Post.query.filter_by(user_id=self.id)
         return followed.union(own).order_by(Post.timestamp.desc())
 
+    # add project model and methods
+    def followed_projects(self):
+        followed = Project.query.join(
+            followers, (followers.c.followed_id == Project.user_id)).filter(
+                followers.c.follower_id == self.id)
+        own = Project.query.filter_by(user_id=self.id)
+        return followed.union(own).order_by(Project.timestamp.desc())
+
     def get_reset_password_token(self, expires_in=600):
         return jwt.encode(
             {'reset_password': self.id, 'exp': time() + expires_in},
