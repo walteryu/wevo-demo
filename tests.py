@@ -5,6 +5,10 @@ from app import create_app, db
 from app.models import User, Post
 from config import Config
 
+# packages for loading env vars
+import os
+from dotenv import load_dotenv
+
 
 class TestConfig(Config):
     TESTING = True
