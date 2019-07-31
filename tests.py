@@ -97,6 +97,7 @@ class UserModelCase(unittest.TestCase):
         self.assertEqual(f3, [p3, p4])
         self.assertEqual(f4, [p4])
 
+    # todo: run migrations to instantiate project model
     def test_follow_projects(self):
         # create four users
         u1 = User(username='john', email='john@example.com')
