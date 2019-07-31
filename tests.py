@@ -10,6 +10,7 @@ class TestConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = 'sqlite://'
     ELASTICSEARCH_URL = None
+    SECRET_KEY = os.environ.get('SECRET_KEY')
 
 
 class UserModelCase(unittest.TestCase):
